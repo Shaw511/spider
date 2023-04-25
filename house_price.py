@@ -3,6 +3,7 @@ import requests
 import parsel
 import csv
 import time
+import json
 '''
 1.获取url地址
 2.python代码发送指定地址的请求
@@ -27,6 +28,21 @@ for name in area_name.keys():
         }
         #发送地址请求
         res = requests.get(url=url, headers=headers) #post put delete
+        # print(res.text)
+        #断言
+        # 断言状态码是否为200
+        assert res.status_code == 200
+
+        # # 将响应内容转换为JSON格式
+        # response_json = json.loads(res.text)
+        # 
+        # # 断言响应内容中title字段是否为"json-server"
+        # assert response_json['title'] == 'json-server'
+
+        # 断言响应时间是否小于1秒
+        assert res.elapsed.total_seconds() < 1
+
+
         # print(res) #<Response [200]>
         html_text = res.text #请求返回对象的文本内容
         # print(html_text)
